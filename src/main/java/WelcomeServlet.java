@@ -15,7 +15,7 @@ public class WelcomeServlet extends HttpServlet {
 		String username=request.getParameter("username");  
 		
 		out.print("<body align=center><h1><font color=green>Login Success, Welcome "+username+"</font><body><br/><br/><br/><a href=index.jsp>Logout</a><br/>");  
-			  
+			  out.print("<body align=center><h1><font color=green>Login Success, Welcome "+username+"</font><body><br/><br/><br/><a href=index.jsp>Logout</a><br/>"); 
 		out.close();  
 	}  
   
