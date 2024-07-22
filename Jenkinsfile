@@ -1,41 +1,28 @@
 pipeline {
     agent any
     
-     tools
-    {
-       maven "Maven"
-    }
-    
-
-
-
-
-stages{
-        stage('Build'){
+    stages {
+        stage('Checkout') {
             steps {
-                sh 'mvn package'
-            }
-            post {
-                success {
-                    echo 'Now Archiving...'
-                    archiveArtifacts artifacts: '**/target/*.war'
-                }
+                git 'https://github.com/nareshnaresh47/tomcatwebapp.git'
             }
         }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    def server = 'http://13.201.71.133:8080'
+                    def warFile = 'target/DevOpsWebApp1-1.0.0-SNAPSHOT.war'
+                    def appName = 'Redbus'
 
-        stage ('UnitTest'){
-            parallel{
-                stage ('Deploy to Staging'){
-                    steps {
-                        sh 'mvn clean test'
-                    }
-                }
-
-                stage ("Deployment"){
-
-                    
-                    steps {
-                        deploy adapters: [tomcat7(credentialsId: 'tomcar', path: '', url: 'http://13.212.250.132:8080/')], contextPath: 'Redbus', war: '*/*.war'
+                    withCredentials([usernamePassword(credentialsId: 'Tomcat', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh """
+                        curl -u $USERNAME:$PASSWORD -T $warFile "$server/manager/text/deploy?path=/$appName&update=true"
+                        """
                     }
                 }
             }
