@@ -1,9 +1,9 @@
 <html>
 	<head>
-		<title>DevOpsWebApp AWS Login Page</title>
+		<title>DevOpsWebApp AWS DevOps Login Page</title>
 	</head>
 	<body align=center>
-		<h2>Hello ALL ..Welcome to AWS Devops</h2>
+		<h1>Hello ALL ..Welcome to AWS Devops DevOps Devops DevOps</h1>
 		<h3>Find the <font color=red>DevOps Stack</font> list below.</h3>
 		<a href=LoginPage.html >Login</a>
 		<br/><br/>
