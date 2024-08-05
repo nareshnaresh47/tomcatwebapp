@@ -9,12 +9,12 @@ pipeline {
         }
 		stage('Test') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean test'
             }
         }
 		stage('SonarScan') {
             steps {
-                sh 'mvn clean package'
+                sh 'echo "SonarScan"'
             }
         }
         stage('Deploy') {
