@@ -1,31 +1,30 @@
 pipeline {
     agent any
     
-     tools
-    {
-       maven "Maven"
-    }
-    
-
-
-
-
-stages{
-        stage('Build'){
+    stages {
+        stage('Build') {
             steps {
-                sh 'mvn package'
+                sh 'mvn clean package'
             }
-     
         }
-
-        stage ('UnitTest'){
-         
-                    steps {
-                        sh 'mvn clean test'
-                    }
-                }
-
-            
-            
+		stage('Test') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+		stage('SonarScan') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Deploy') {
+            steps {
+        
+		sh '''
+		scp target/DevOpsWebApp1-1.0.0-SNAPSHOT.war root@54.254.215.34:/opt/apache-tomcat-9.0.91/webapps
+#scp target/DevOpsWebApp1-1.0.0-SNAPSHOT.war root@54.254.215.34:/opt/apache-tomcat-9.0.91/webapps
+'''
+            }
         }
     }
+}
