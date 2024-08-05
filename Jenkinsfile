@@ -26,7 +26,7 @@ pipeline {
             steps {
         
 		sh '''
-  ls -lart
+  ls -lart /var/lib/jenkins/workspace/Pipeline/target
   pwd
 		scp target/DevOpsWebApp1-1.0.0-SNAPSHOT.war root@54.254.215.34:/opt/apache-tomcat-9.0.91/webapps
 #scp target/DevOpsWebApp1-1.0.0-SNAPSHOT.war root@54.254.215.34:/opt/apache-tomcat-9.0.91/webapps
